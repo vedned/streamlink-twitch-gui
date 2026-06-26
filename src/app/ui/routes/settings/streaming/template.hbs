@@ -106,6 +106,41 @@
 
 <fieldset>
 {{#settings-row
+	(t "settings.streaming.twitch-oauth.title")
+	(t "settings.streaming.twitch-oauth.description")
+	icon="fa-shield"
+	notes=(t "settings.streaming.twitch-oauth.notes")
+	documentation="--twitch-api-header"
+}}
+	{{input
+		type="password"
+		value=(mut model.streaming.twitch_oauth_token)
+		classNames="col-xs-12"
+		placeholder=(t "settings.streaming.twitch-oauth.placeholder")
+	}}
+	<p class="small">
+		{{t "settings.streaming.twitch-oauth.manual-hint"}}
+	</p>
+	{{#form-button
+		action=(action "connectTwitchAccount")
+		classNames="btn-twitch-oauth"
+		icon="fa-twitch"
+		iconanim=true
+		disabled=twitchOAuthPending
+	}}
+		{{t "settings.streaming.twitch-oauth.connect"}}
+	{{/form-button}}
+	{{#if twitchOAuthMessage}}
+		<p class="small {{twitchOAuthMessageClass}}">{{twitchOAuthMessage}}</p>
+	{{/if}}
+	<p class="small text-muted">
+		{{t "settings.streaming.twitch-oauth.warning"}}
+	</p>
+{{/settings-row}}
+</fieldset>
+
+<fieldset>
+{{#settings-row
 	(t "settings.streaming.playerinput.title")
 	(t "settings.streaming.playerinput.description")
 	icon="fa-file-video-o"
